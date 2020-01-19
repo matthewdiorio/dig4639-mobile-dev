@@ -1,0 +1,1 @@
+I would be interested in pursuing employment in a React environment that will allow for me to expand my skills in React, Javascript, and design. In enhancing my skills from internships and school work, I would like to bring the knowledge I have to further my career and position goals. I look forward in sharing my skills to move forward with these positions.
