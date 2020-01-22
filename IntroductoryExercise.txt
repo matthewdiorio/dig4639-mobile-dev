@@ -1,7 +1,7 @@
 Matthew Diorio, 
 The app I am choosing is Snapchat. Snapchat allows for modifying images that are stored locally on the device. 
-It displays for the user to select an image from their phone.
-Then it takes the photo and displays that photo to the user in Snapchat. 
+It displays for the user to select an image from their phone from their file system.
+Then it takes the photo and displays that photo to the user in Snapchat using main memory. 
 There are different inputs displayed to the user such as text, stickers, and filters. 
-It takes that input and modifys the image based on the input
+It takes that input and modifys the images data based on the input.
 Then saves the modified image locally back on the phone.

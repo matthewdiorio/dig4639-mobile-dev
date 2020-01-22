@@ -6,3 +6,8 @@ The *ice* folder contains in-class exercises.
 
 ## About Me
 This should be replaced.
+
+## Merging
+1. Item 1
+1. Item 2
+1. Item 3
