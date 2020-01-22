@@ -11,3 +11,6 @@ This should be replaced.
 1. Item 1
 1. Item 2
 1. Item 3
+## Conflicts
+
+This section represents code on the server that isn't on the local repository.
