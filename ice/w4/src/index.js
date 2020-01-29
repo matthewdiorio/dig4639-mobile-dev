@@ -1,8 +1,8 @@
 import Component from "./Component.js";
-import Task from "./Task.js";
+//import Task from "./Task.js";
 function runOnLoad()
 {
-    
+    console.log("New Change");
     let element = document.createElement("div");
     element.id = "Test";
     document.body.appendChild(element);
