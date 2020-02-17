@@ -1,8 +1,38 @@
-import { Sum } from './MyMath.js'
+import { Sum, AddList } from './MyMath.js'
 
+describe("Sum", () => {
 test('adds 1 + 2 to equal 3', () => {
   expect(Sum(1, 2)).toBe(3)
 })
+test('Whether undefined is returned on invalid type', () => {
+  expect(Sum(1, "test")).toBeUndefined()
+})
+test('produces the sum of 10 + 20 whic should be 30', () => {
+  expect(Sum(10, 20)).toBe(30)
+})
+})
+
+
+describe("AddList", () => {
+  test('adds list of numbers together', () => {
+    let myList = [1,2,3]
+    let result = AddList(myList)
+    expect(result).toBe(6)
+    myList = [2,2,3]
+    result = AddList(myList)
+    expect(result).toBe(7)
+  })
+  test('test undefined', () => {
+    let myList = []
+    let result = AddList(myList)
+    expect(result).toBeUndefined()
+  })
+  })
+
+
+
+
+
 
 // ICE 
 
