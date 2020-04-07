@@ -1,24 +1,15 @@
 import React from 'react';
-import './App.css';
+import { StyleSheet, Text, View, Button} from 'react-native';
 import questions from './questions.json'
-
+import QuizQuestion from "../QuizQuestion"
 const TIME_LIMIT = 5
 const TITLE_STATE = 0
+const COUNTDOWN_STATE = 3
 const QUESTION_STATE = 1
 const FINAL_STATE = 2
 
-class QuizQuestion extends React.Component {
-  render() {
-    return <>
-    <h1>{this.props.question}</h1>
-    {this .props.answers.map((v, i) =>
-    <input className="answerButton" onClick={() => this.props.nextQuestion(v.correct)} type="button" key ={i}
-    value={v.text}/>)}
-    </>
-  }
-}
 
-class TitlePage extends React.Component{
+class Home extends React.Component{
   constructor(props){
     super(props)
       this.state = {
@@ -35,9 +26,10 @@ class TitlePage extends React.Component{
       if(correct){
         this.setState({score: this.state.score+1})
       }
-      if(this.state.currentQuestion == questions.length - 1){
+      if(this.state.currentQuestion == questions.length-1){
         console.log("DONE")
         clearInterval(this.timer)
+        this.setState({currentState:FINAL_STATE, titleText:"Results!" })
       }else {
      //   
         console.log(this.state.currentQuestion)
@@ -74,33 +66,38 @@ class TitlePage extends React.Component{
     }
     start() {
       console.log("Starting!")
-      this.setState({titleText: "Starting the Quiz!", counter: 0})
+      this.setState({titleText: "Starting the Quiz!", counter: 0, currentState: COUNTDOWN_STATE})
       this.timer = setInterval(() => this.countdown(), 1000)
     }
 
     render(){
       return(
-        <>
-        <p>{this.timeLimit - this.state.counter}</p>
+        <View>
         {((this.state.currentState === TITLE_STATE) ?
-        <>
-        <h2>{this.state.titleText}</h2>
-        <input className="start" type="button" value="start" onClick={()=>this.start()} />
-        </>
+            <View>
+                <Text>{this.state.titleText}</Text>
+                <Button className="start" title="Start" onPress={()=>this.start()} />
+            </View>
+        :(this.state.currentState === COUNTDOWN_STATE) ?
+            <View>
+                <Text>{this.timeLimit - this.state.counter}</Text>
+                <Text>{this.state.titleText}</Text>
+                
+            </View>
+        :(this.state.currentState === QUESTION_STATE) ?
+            <View>
+                <Text>{this.timeLimit - this.state.counter}</Text>
+                <QuizQuestion answers={questions[this.state.currentQuestion].possibleAnswers} question=
+                {questions[this.state.currentQuestion].question} nextQuestion={(correct) => this.nextQuestion(correct)}
+                ></QuizQuestion>
+            </View>
         :
-        <QuizQuestion answers={questions[this.state.currentQuestion].possibleAnswers} question=
-        {questions[this.state.currentQuestion].question} nextQuestion={(correct) => this.nextQuestion(correct)}
-        ></QuizQuestion>)}
-        <p>Score: {this.state.score}</p>
-        </>)
+            <View></View>
+        )}
+        <Text>Score: {this.state.score}</Text>
+        </View>
+        )
     }
   }
 
-  function App() {
-    return (
-      <div className="App">
-        <TitlePage></TitlePage>
-      </div>
-    );
-  }
-  export default App;
+  export default Home;
