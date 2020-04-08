@@ -1,68 +1,90 @@
 [
     {
-        "question": "What is 2+2?",
+        "question": "In JavaScript, the keyword class is used to declare an object with named functions and properties.",
         "possibleAnswers":
         [
             {
-                "text":"4",
+                "text":"true",
                 "correct": true
             },
             {
-                "text":"3",
-                "correct": false
-            },
-            {
-                "text":"1",
-                "correct": false
-            },
-            {
-                "text":"5",
+                "text":"false",
                 "correct": false
             }
             
         ]
     },
     {
-        "question": "What is 2+4?",
+        "question": "A major difference between the keywords let and const is that values defined using const...",
         "possibleAnswers":
         [
             {
-                "text":"4",
+                "text":"Can be changed within the scope",
                 "correct": false
             },
             {
-                "text":"3",
+                "text":"Persist globally",
                 "correct": false
             },
             {
-                "text":"1",
-                "correct": false
-            },
-            {
-                "text":"6",
+                "text":"Can't be changed within the scope",
                 "correct": true
             }
             
         ]
     },
     {
-        "question": "What is 1+4?",
+        "question": "What Array method adds an additional value to the end of an array?",
         "possibleAnswers":
         [
             {
-                "text":"4",
+                "text":"filter()",
                 "correct": false
             },
             {
-                "text":"3",
+                "text":"push()",
+                "correct": true
+            },
+            {
+                "text":"pop()",
+                "correct": false
+            }
+            
+        ]
+    },
+    {
+        "question": "Arrow functions bind the this keyword lexically (within the scope of where it is declared).",
+        "possibleAnswers":
+        [
+            {
+                "text":"true",
+                "correct": true
+            },
+            {
+                "text":"false",
+                "correct": false
+            }
+            
+        ]
+    },
+    {
+        "question": "JSON stands for what?",
+        "possibleAnswers":
+        [
+            {
+                "text":"Jason from Statefarm",
                 "correct": false
             },
             {
-                "text":"1",
+                "text":"JavaScript Object Number",
                 "correct": false
             },
             {
-                "text":"5",
+                "text":"Javascript Serialized Object Notation",
+                "correct": false
+            },
+            {
+                "text":"JavaScript Object Notation",
                 "correct": true
             }
             
