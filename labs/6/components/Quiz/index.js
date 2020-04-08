@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button} from 'react-native';
+import {StyleSheet, Text, View, Button, Switch} from 'react-native';
 import questions from './questions.json'
 import QuizQuestion from "../QuizQuestion"
 const TIME_LIMIT = 10
@@ -7,13 +7,12 @@ const TITLE_STATE = 0
 const COUNTDOWN_STATE = 3
 const QUESTION_STATE = 1
 const FINAL_STATE = 2
-
 const styles = StyleSheet.create({
     title: {
         flex:1,
         fontSize:30,
         textAlign:"center",
-        margin:20,
+        marginBottom:"25%",
         fontWeight: 'bold'
     },
     timer: {
@@ -30,7 +29,13 @@ const styles = StyleSheet.create({
     score:{
         alignItems: 'center',
         justifyContent: 'center',
-
+    },
+    timeSwitch:{
+        marginTop:100,
+        flex:1, 
+        flexDirection: 'row', 
+        justifyContent: 'center'
+       
     }
   });
 
@@ -46,7 +51,7 @@ class Home extends React.Component{
         titleText: "Welcome to our Quiz!",
         counter: 0,
         currentState: TITLE_STATE,
-        currentQuestion: 0
+        currentQuestion: 0,
       }
       this.timeLimit = TIME_LIMIT
     }
@@ -71,34 +76,34 @@ class Home extends React.Component{
       }
     }
     countdown() { 
-      if(this.state.counter < this.timeLimit){
-        this.setState({
-          titleText: 'Starting the Quiz!',
-          counter: this.state.counter + 1
-        })
-      if(this.state.currentState == QUESTION_STATE && this.state.counter == this.timeLimit){
-         this.nextQuestion()
-      }
-      }else {
-        this.setState({
-          titleText: "Begging Quiz!",
-          currentState: QUESTION_STATE,
-          counter: 0
-        })
-        if(this.state.currentState == TITLE_STATE){
-          this.timer = setInterval(() => this.countdown(), 1000)
-          clearInterval(this.timer)
-        } else {
-          this.setState({titleText:"You answered!"})
-        }
-      }
+        if(this.state.counter < this.timeLimit){
+            this.setState({
+            titleText: 'Starting the Quiz!',
+            counter: this.state.counter + 1
+            })
+
+            if(this.state.currentState == QUESTION_STATE && this.state.counter == this.timeLimit && this.state.isTimed) this.nextQuestion()
+
+        }else{
+            this.setState({
+            titleText: "Begging Quiz!",
+            currentState: QUESTION_STATE,
+            counter: 0
+            })
+            if(this.state.currentState == TITLE_STATE){
+            this.timer = setInterval(() => this.countdown(), 1000)
+            clearInterval(this.timer)
+            }
+        }  
     }
     start() {
       console.log("Starting!")
       this.setState({titleText: "Starting the Quiz!", counter: 0, currentState: COUNTDOWN_STATE})
       this.timer = setInterval(() => this.countdown(), 1000)
     }
-
+    toggleSwitch = (value) => {
+        this.setState({isTimed:value})
+    }
     render(){
       return(
         <View>
@@ -106,6 +111,10 @@ class Home extends React.Component{
             <View>
                 <Text style={styles.title}>{this.state.titleText}</Text>
                 <Button title="Start" onPress={()=>this.start()} />
+                <View style={styles.timeSwitch}>
+                  <Switch onValueChange = {this.toggleSwitch} value = {this.state.isTimed}/>
+                  <Text>Timed Mode?</Text>
+                </View>
             </View>
         :(this.state.currentState === COUNTDOWN_STATE) ?
             <View>
@@ -115,7 +124,7 @@ class Home extends React.Component{
             </View>
         :(this.state.currentState === QUESTION_STATE) ?
             <View>
-                <Text style={styles.timer}>{this.timeLimit - this.state.counter}</Text>
+                {(this.state.isTimed) ? <Text style={styles.timer}>{this.timeLimit - this.state.counter}</Text> : null}
                 <QuizQuestion answers={questions[this.state.currentQuestion].possibleAnswers} question=
                 {questions[this.state.currentQuestion].question} nextQuestion={(correct) => this.nextQuestion(correct)}
                 ></QuizQuestion>
