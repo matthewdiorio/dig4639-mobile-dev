@@ -1,14 +1,34 @@
 import React from 'react';
-import {Text, View, Button} from 'react-native';
+import {StyleSheet, Text, View, Button} from 'react-native';
+
+const styles = StyleSheet.create({
+    question:{
+        fontSize:30,
+        fontWeight:"bold"
+    },
+    separator:{
+        margin:10
+    }
+  });
+
+  function Separator() {
+    return <View style={styles.separator} />;
+  }
 class QuizQuestion extends React.Component {
     render() {
       return (
       <View>
-          <Text h1>{this.props.question}</Text>
+          <Text style={styles.question}>{this.props.question}</Text>
           {this.props.answers.map((v, i) =>
-          <Button onPress={() => this.props.nextQuestion(v.correct)} type="button" key ={i}
-          title={v.text}/>)}
+          <View>
+          <Separator />
+          <Button  onPress={() => this.props.nextQuestion(v.correct)} type="button" key ={i}
+          title={v.text}/>
+          </View>
+          )}
+          <Separator />
       </View>
   )}
   }
+
   export default QuizQuestion
