@@ -20,8 +20,8 @@ class QuizQuestion extends React.Component {
       <View>
           <Text style={styles.question}>{this.props.question}</Text>
           {this.props.answers.map((v, i) =>
-          <View>
-          <Separator />
+          <View key = {i + "view"}>
+          <Separator key = {i+ "seperator"}/>
           <Button  onPress={() => this.props.nextQuestion(v.correct)} type="button" key ={i}
           title={v.text}/>
           </View>
