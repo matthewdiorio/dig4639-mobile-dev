@@ -1,6 +1,6 @@
 
 import React from 'react';
-import CardList from "./Components/CardList";
+import CardList from "./components/CardList";
 
  class App extends React.Component {
   render() {
