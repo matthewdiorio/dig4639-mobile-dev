@@ -46,14 +46,14 @@ class Contacts extends React.Component {
       //this.setState({contacts: data.Contacts});
     });
   }
-  add(){
+  add(name, number){
     window.fetch("http://plato.mrl.ai:8080/contacts/add", {
         method: "POST",
         headers: {"API": "diorio",
         "Content-Type": "application/json",
         "Accept":"application/json"
         },
-        body: JSON.stringify({"name":0})
+        body: JSON.stringify({"name":name,"number":number})
     })
     .then((res) => res.json())
     .then((data) => {
