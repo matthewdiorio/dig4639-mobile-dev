@@ -4,15 +4,12 @@ class Contacts extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {name: "", contactCount: "", contacts: []};
+    this.state = {name: "", contactCount: "", contacts: [], refresh:true};
 
   }
-  componentDidUpdate(){
-    this.profile()
-    this.contacts()
- 
-  }
+
   componentDidMount() {
+    this.profile()
     this.contacts()
   }
   profile(){
@@ -37,13 +34,14 @@ class Contacts extends React.Component {
         "Content-Type": "application/json",
         "Accept":"application/json"
         },
-        body: JSON.stringify({"position":0})
+        body: JSON.stringify({"position":position})
     })
     .then((res) => res.json())
     .then((data) => {
         console.log(data)
         
-      //this.setState({contacts: data.Contacts});
+      this.contacts()
+      this.profile()
     });
   }
   add(name, number){
