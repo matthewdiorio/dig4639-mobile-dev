@@ -16,10 +16,19 @@ class Contacts extends React.Component {
     window.fetch("http://plato.mrl.ai:8080/profile", {headers: {API: "diorio"}})
     .then((res) => res.json())
     .then((data) => {
-      this.setState({name: data.name, contactCount: data.count});
+      this.setState(
+        {
+          name: data.name, 
+          contactCount: data.count,
+          addName: "",
+          addNumber: "",
+        });
     });
   }
-  
+  update(){
+    this.contacts()
+    this.profile()
+  }
   contacts(){
     window.fetch("http://plato.mrl.ai:8080/contacts", {headers: {API: "diorio"}})
     .then((res) => res.json())
@@ -40,26 +49,37 @@ class Contacts extends React.Component {
     .then((data) => {
         console.log(data)
         
-      this.contacts()
-      this.profile()
+      this.update()
     });
   }
-  add(name, number){
+  add(){
     window.fetch("http://plato.mrl.ai:8080/contacts/add", {
         method: "POST",
         headers: {"API": "diorio",
         "Content-Type": "application/json",
         "Accept":"application/json"
         },
-        body: JSON.stringify({"name":name,"number":number})
+        body: JSON.stringify({"name":this.state.addName,"number":this.state.addNumber})
     })
     .then((res) => res.json())
     .then((data) => {
-        console.log(data)
+        this.update()
         
       //this.setState({contacts: data.Contacts});
     });
   }
+  handleNameChange = (event) => {
+    this.setState({addName: event.target.value});
+  }
+  handleNumberChange = (event) => {
+    this.setState({addNumber: event.target.value});
+  }
+  handleSubmit = (event) => {
+    event.preventDefault();
+    event.target.reset();
+    this.add();
+}
+
   render() {
     return (
         
@@ -81,6 +101,25 @@ class Contacts extends React.Component {
            );
          })
        }
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <label>Name:</label>
+          <input
+            type="text"
+            
+            onChange={this.handleNameChange}
+            required
+         />
+          <label>Number:</label>
+            <input
+            type="text"
+            onChange={this.handleNumberChange}
+            required
+         />
+          <input type = "submit"
+            value='Add Contact'
+            ></input>
+        
+        </form>
       </div>
     );
   }
