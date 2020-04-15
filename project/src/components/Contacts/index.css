@@ -1,0 +1,26 @@
+.container{
+        width: 50%;
+        margin: 0 auto;
+        
+}
+.heading{
+    background-color: darkblue;
+    color: white;
+    padding:20px;
+    text-align:center;
+}
+.contact{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+
+}
+
+.form{
+    text-align:center;
+}
+.input{
+display:inline-block;
+margin:5px;
+}

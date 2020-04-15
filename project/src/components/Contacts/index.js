@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './index.css'
 
 class Contacts extends React.Component {
 
@@ -83,14 +84,16 @@ class Contacts extends React.Component {
   render() {
     return (
         
-      <div>
-        <h1>Name:{this.state.name} Contact Count: {this.state.contactCount}</h1>
-
-       { 
+      <div className="container">
+        <div className="heading">
+          <h1>Name: {this.state.name}</h1>
+          <h2>Contact Count: {this.state.contactCount}</h2>
+       </div>
+        { 
          this.state.contacts.map((value, index) => {
            return(
-            <div key={index+"div"}>
-                <h3 key={index+"h3"}>{value.name}</h3>
+            <div className="contact" key={index+"div"}>
+                <h4 key={index+"h3"}>{value.name}</h4>
                 <p key={index+"p"}>{value.number}</p>
                 <input type = "button"
                     value='Delete'
@@ -98,23 +101,29 @@ class Contacts extends React.Component {
                     className = "answerButton"
                     onClick={() => this.remove(index)}></input>
             </div>
-           );
-         })
-       }
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <label>Name:</label>
-          <input
-            type="text"
-            
-            onChange={this.handleNameChange}
-            required
-         />
-          <label>Number:</label>
-            <input
-            type="text"
-            onChange={this.handleNumberChange}
-            required
-         />
+             );
+           })
+         }
+       <br />
+        <form className="form" onSubmit={this.handleSubmit.bind(this)}>
+            <div className="input">
+              <label>Name:</label>
+              <input
+                type="text"
+                
+                onChange={this.handleNameChange}
+                required
+              />
+           </div>
+           <div className="input">
+            <label>Number:</label>
+              <input
+              type="text"
+              onChange={this.handleNumberChange}
+              required
+             />
+            </div>
+          <br />
           <input type = "submit"
             value='Add Contact'
             ></input>
